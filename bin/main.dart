@@ -13,25 +13,24 @@
 //  ]
 
 main() {
-  print(ListOfPermutations([]));
+  print(ListOfPermutations([1,2,3]));
 }
 
 List<List<int>> ListOfPermutations(List<int> inputList) {
   List<List<int>> result = [];
-
-  void calculatePermutations(List<int> list, int index) {
-    if (index == list.length) {
-      result.add(list);
-      return;
-    }
-    for (int i = index; i < list.length; i++) {
-      List<int> permutation = List.from(list);
-      permutation[index] = list[i];
-      permutation[i] = list[index];
-      calculatePermutations(permutation, index + 1);
-    }
-  }
-  calculatePermutations(inputList, 0);
-
+  calculatePermutations(inputList, 0,result);
   return result;
+}
+
+void calculatePermutations(List<int> list, int index,List<List<int>> result) {
+  if (index == list.length) {
+    result.add(list);
+    return;
+  }
+  for (int i = index; i < list.length; i++) {
+    List<int> permutation = List.from(list);
+    permutation[index] = list[i];
+    permutation[i] = list[index];
+    calculatePermutations(permutation, index + 1,result);
+  }
 }
